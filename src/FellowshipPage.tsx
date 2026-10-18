@@ -1,15 +1,14 @@
 import { useRef, type CSSProperties } from 'react'
+import { ChallengeGrid } from './ChallengeGrid'
 import {
   aims,
   applicationDeadline,
   applicationTypes,
   applySteps,
-  challengeBriefs,
   challengeTracks,
   cohortStats,
   contributeEmail,
   contributeReasons,
-  deckSlideUrl,
   deliverables,
   eligibleRoles,
   fellowshipLinks,
@@ -19,25 +18,24 @@ import {
   selectionCriteria,
   support,
   timeline,
-  upcomingChallenges,
 } from './content'
 import { d, pad } from './helpers'
-import { Chrome, Count, ExternalLink, Eyebrow, Rays, Rise, Watermark } from './primitives'
+import { Count, ExternalLink, Eyebrow, Rays, Rise, Watermark } from './primitives'
 import { useSlideReveal } from './useSlideReveal'
-
-const RUNNING_HEAD = 'BetterGovPH Fellowship'
+import { useStickyHero } from './useStickyHero'
 
 export function FellowshipPage() {
   const rootRef = useRef<HTMLElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
   useSlideReveal(rootRef)
+  useStickyHero(heroRef)
 
   return (
     <main className="fs-main" ref={rootRef}>
       {/* ═══════════════════════════ TITLE ═══════════════════════════ */}
 
-      <section className="fs-slide t-ink s-title" id="top">
+      <section className="fs-slide t-ink s-title" id="top" ref={heroRef}>
         <Rays />
-        <Chrome left="Pilot cohort" right="December 2026 – March 2027" />
         <Eyebrow>Call for builders</Eyebrow>
         <h1 className="fs-title">
           <span>
@@ -62,9 +60,13 @@ export function FellowshipPage() {
             Read the guidelines
           </ExternalLink>
         </div>
-        <p className="fs-deadline fs-in" style={d(1)}>
-          <span className="fs-tag">Now open</span> Applications close Tuesday, {applicationDeadline}
-        </p>
+        <ul className="fs-meta fs-in" style={d(1)}>
+          <li>
+            <span className="fs-tag">Now open</span> Applications close Tuesday,{' '}
+            {applicationDeadline}
+          </li>
+          <li>Pilot cohort · December 2026 – March 2027</li>
+        </ul>
         <p className="fs-hero-fund fs-in" style={d(1.1)}>
           <a href="#contribute">
             Not applying? Help fund the fellows <span aria-hidden="true">↓</span>
@@ -76,7 +78,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-paper s-about" id="about">
         <Watermark n="01" />
-        <Chrome left={RUNNING_HEAD} right="01 · The fellowship" />
         <h2 className="fs-display">
           <Rise text="A fellowship built around" />{' '}
           <em>
@@ -97,7 +98,6 @@ export function FellowshipPage() {
       </section>
 
       <section className="fs-slide t-ink s-cohort">
-        <Chrome left="The pilot cohort" right="01 · The fellowship" />
         <h2 className="fs-heading">
           <Rise text="The pilot cohort," />{' '}
           <em>
@@ -116,10 +116,7 @@ export function FellowshipPage() {
           ))}
         </div>
         <div className="fs-band fs-in" style={d(0.7)}>
-          <p>
-            Organized by BetterGovPH, WeSolve Foundation, PH-OGP, and DBM.{' '}
-            <span>Supported by the Mozilla Foundation.</span>
-          </p>
+          <p>Organized by BetterGovPH, WeSolve Foundation, PH-OGP, and DBM.</p>
         </div>
       </section>
 
@@ -127,7 +124,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-wash s-aims" id="aims">
         <Watermark n="02" />
-        <Chrome left={RUNNING_HEAD} right="02 · Aims" />
         <h2 className="fs-heading">
           <Rise text="What the fellowship" />{' '}
           <em>
@@ -145,7 +141,6 @@ export function FellowshipPage() {
       </section>
 
       <section className="fs-slide t-blue s-compass" id="compass">
-        <Chrome left="Executive Order No. 126, s. 2026" right="02 · Aims" />
         <div className="fs-statement">
           <h2 className="fs-display">
             <Rise text="One unified platform for" />{' '}
@@ -170,7 +165,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-ink s-areas" id="challenges">
         <Watermark n="03" />
-        <Chrome left={RUNNING_HEAD} right="03 · The challenges" />
         <div className="fs-split">
           <div>
             <h2 className="fs-display">
@@ -193,102 +187,28 @@ export function FellowshipPage() {
             ))}
           </ol>
         </div>
-        <p className="fs-note fs-in" style={d(0.8)}>
-          Still to come: {upcomingChallenges.join(', and ')}. The organizers may announce more.
-        </p>
       </section>
 
-      {challengeBriefs.map((brief, n) => (
-        <section
-          key={brief.slug}
-          className={`fs-slide ${n % 2 === 0 ? 't-paper' : 't-ink'} s-challenge`}
-          id={`challenge-${brief.slug}`}
-        >
-          <Chrome
-            left={`Challenge ${pad(n + 1)} of ${pad(challengeBriefs.length)} · From the BetterGov Summit`}
-            right="03 · The challenges"
-          />
-          <div className="fs-challenge">
-            <div className="fs-challenge__copy">
-              <Eyebrow>{brief.track}</Eyebrow>
-              <h2 className="fs-heading">
-                <Rise text={brief.headline} />{' '}
-                <em>
-                  <Rise text={brief.accent} start={0.2} />
-                </em>
-              </h2>
-              <p className="fs-lede fs-in" style={d(0.35)}>
-                {brief.statement}
-              </p>
-
-              {brief.figures && (
-                <div className="fs-figures fs-in" style={d(0.45)}>
-                  {brief.figures.map(figure => (
-                    <div key={figure.value} className="fs-figure">
-                      <p className="fs-figure__n">{figure.value}</p>
-                      <p>{figure.label}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <p className="fs-label fs-in" style={d(0.5)}>
-                What fellows could build
-              </p>
-              <ul className="fs-build">
-                {brief.build.map((item, k) => (
-                  <li key={item} className="fs-in" style={d(0.55 + k * 0.08)}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <dl className="fs-partners fs-in" style={d(0.8)}>
-                <div>
-                  <dt>Government</dt>
-                  <dd>{brief.government}</dd>
-                </div>
-                <div>
-                  <dt>Civil society</dt>
-                  <dd>{brief.civilSociety}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <a
-              className="fs-deck fs-in"
-              style={d(0.3)}
-              href={deckSlideUrl(brief.deck.slideId)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="fs-deck__frame">
-                <img
-                  src={brief.deck.image}
-                  alt=""
-                  width={960}
-                  height={540}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </span>
-              <span className="fs-deck__caption">
-                <span>Pitch deck by {brief.deck.by}</span>
-                <b>
-                  Open the {brief.track} deck <span aria-hidden="true">↗</span>
-                </b>
-              </span>
-            </a>
-          </div>
-          {brief.figureSource && <p className="fs-source">{brief.figureSource}</p>}
-        </section>
-      ))}
+      <section className="fs-slide t-paper s-summit" id="summit-challenges">
+        <Eyebrow>From the BetterGov Summit</Eyebrow>
+        <h2 className="fs-heading">
+          <Rise text="Partners ready" />{' '}
+          <em>
+            <Rise text="to build with you." start={0.15} />
+          </em>
+        </h2>
+        <p className="fs-lede fs-in" style={d(0.3)}>
+          Government agencies and civil society organizations presented these challenges on October
+          17, 2026. Open one to see what fellows could build, who owns it, and the partners' own
+          pitch deck.
+        </p>
+        <ChallengeGrid />
+      </section>
 
       {/* ═══════════════════════════ 04 · WHO CAN APPLY ═══════════════════════════ */}
 
       <section className="fs-slide t-paper s-who" id="who">
         <Watermark n="04" />
-        <Chrome left={RUNNING_HEAD} right="04 · Who can apply" />
         <h2 className="fs-display">
           <Rise text="Builders who can" />{' '}
           <em>
@@ -324,7 +244,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-ink s-deliver" id="deliverables">
         <Watermark n="05" />
-        <Chrome left={RUNNING_HEAD} right="05 · The work" />
         <h2 className="fs-heading">
           <Rise text="Working solutions," />{' '}
           <em>
@@ -343,7 +262,6 @@ export function FellowshipPage() {
       </section>
 
       <section className="fs-slide t-wash s-partnership" id="partnership">
-        <Chrome left="How the partnership works" right="05 · The work" />
         <h2 className="fs-heading">
           <Rise text="DBM + PH-OGP + BetterGovPH +" />{' '}
           <em>
@@ -369,7 +287,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-paper s-support" id="support">
         <Watermark n="06" />
-        <Chrome left={RUNNING_HEAD} right="06 · Support" />
         <h2 className="fs-heading">
           <Rise text="What selected" />{' '}
           <em>
@@ -394,7 +311,6 @@ export function FellowshipPage() {
       </section>
 
       <section className="fs-slide t-ink s-fund" id="fund">
-        <Chrome left="Fellowship fund" right="06 · Support" />
         <Eyebrow>Gross funding pool</Eyebrow>
         <p className="fs-money">
           <Count value={450000} prefix="₱" />
@@ -414,7 +330,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-blue s-contribute" id="contribute">
         <Rays />
-        <Chrome left="Support the fellows" right="06 · Support" />
         <Eyebrow>We're still raising the fellowship fund</Eyebrow>
         <h2 className="fs-display">
           <Rise text="Help fund the fellows." />
@@ -447,7 +362,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-paper s-selection" id="selection">
         <Watermark n="07" />
-        <Chrome left={RUNNING_HEAD} right="07 · Selection" />
         <div className="fs-split">
           <div>
             <h2 className="fs-heading">
@@ -482,7 +396,6 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-ink s-timeline" id="timeline">
         <Watermark n="08" />
-        <Chrome left={RUNNING_HEAD} right="08 · Timeline" />
         <div className="fs-split">
           <h2 className="fs-display">
             <Rise text="October to" />{' '}
@@ -511,7 +424,6 @@ export function FellowshipPage() {
       {/* ═══════════════════════════ APPLY ═══════════════════════════ */}
 
       <section className="fs-slide t-blue s-end" id="apply">
-        <Chrome left="Call for builders" right={`Applications close ${applicationDeadline}`} />
         <h2 className="fs-end">
           <span className="fs-dim">
             <Rise text="Build something useful." />

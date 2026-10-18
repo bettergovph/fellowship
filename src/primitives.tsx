@@ -3,16 +3,6 @@ import { d } from './helpers'
 
 // Building blocks borrowed from the one-year report deck, sized for a scrolling page.
 
-// Running heads repeat on every slide, so screen readers skip them.
-export function Chrome({ left, right }: { left: ReactNode; right?: ReactNode }) {
-  return (
-    <div className="fs-chrome" aria-hidden="true">
-      <span>{left}</span>
-      {right && <span>{right}</span>}
-    </div>
-  )
-}
-
 export function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="fs-eyebrow fs-in">{children}</p>
 }

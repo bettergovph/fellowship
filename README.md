@@ -36,10 +36,12 @@ src/
 ├── content.ts            # All copy, links, dates, and challenge data
 ├── FellowshipApp.tsx     # Shell: skip link, header, page, footer
 ├── FellowshipPage.tsx    # The slides, in order
+├── ChallengeGrid.tsx     # Summit challenge cards and their modals (#challenge-<slug> links)
 ├── FellowshipHeader.tsx
 ├── FellowshipFooter.tsx
-├── primitives.tsx        # Slide building blocks: running heads, rays, rising words, counters
+├── primitives.tsx        # Slide building blocks: watermarks, rays, rising words, counters
 ├── useSlideReveal.ts     # Reveals slides and counts figures as they scroll into view
+├── useStickyHero.ts      # Pins the one-screen hero while the next slide scrolls over it
 ├── helpers.ts
 ├── base.css              # Document defaults: reset, type, focus, skip link
 └── fellowship.css        # The slide design system
@@ -54,7 +56,7 @@ Copy, links, dates, and challenge details live in `src/content.ts`. Sources are 
 
 ### Challenge decks
 
-Each challenge links to its pitch in the consolidated deck by slide id (`deck.slideId` in `content.ts`). If a slide is deleted and recreated in Google Slides, its id changes and the link falls back to the first slide; copy the new id from the slide's link (`#slide=id.…`).
+Each challenge is a card that opens a modal; `#challenge-<slug>` (for example `#challenge-energy`) opens it directly, so a challenge can be shared. The modal links to the pitch in the consolidated deck by slide id (`deck.slideId` in `content.ts`). If a slide is deleted and recreated in Google Slides, its id changes and the link falls back to the first slide; copy the new id from the slide's link (`#slide=id.…`).
 
 The thumbnails in `public/decks/` are the cover slides, exported with:
 
