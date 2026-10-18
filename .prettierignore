@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.next
+out
+
+# Cache directories
+.cache
+.parcel-cache
+.turbo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Coverage
+coverage
+.nyc_output
+
+# Misc
+.DS_Store
+*.log
+*.swp
+*.swo
+
+# Wrangler
+.wrangler
+.dev.vars

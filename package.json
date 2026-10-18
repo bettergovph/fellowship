@@ -1,0 +1,41 @@
+{
+  "name": "bettergov-fellowship",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:client && npm run build:server && npm run build:prerender",
+    "build:client": "vite build --outDir dist/static --emptyOutDir",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server --emptyOutDir",
+    "build:prerender": "node prerender.js",
+    "preview": "vite preview --outDir dist/static",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{js,ts,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"*.{js,ts,json,md}\"",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.27",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "prettier": "^3.7.4",
+    "typescript": "^5.5.4",
+    "vite": "^5.2.0",
+    "wrangler": "^4.54.0"
+  }
+}

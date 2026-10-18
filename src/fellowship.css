@@ -1,0 +1,1446 @@
+/*
+ * fellowship.bettergov.ph
+ *
+ * The one-year report's language, set as a scrolling page: ink, paper and blue
+ * grounds, Inter Tight display type set tight, running heads, chapter
+ * watermarks, and the sun's rays on the title. The report is a fixed
+ * 1920 × 1080 stage; here every slide fills at least one screen and sizes are
+ * fluid. Motion only runs once useSlideReveal adds .fs--motion. Document
+ * defaults (reset, focus, skip link) live in base.css.
+ */
+
+:root {
+  --header-height: 68px;
+}
+
+html,
+body {
+  background: #0a0a0a;
+}
+
+.fs {
+  --ink: #0a0a0a;
+  --ink-soft: #2a2a28;
+  --muted: #5a5a58;
+  --paper: #ffffff;
+  --wash: #f4f7fc;
+  --rule-paper: #d1d8e6;
+  --blue: #0038a8;
+  --blue-dark: #002b82;
+  --blue-bright: #0096ff;
+
+  --display: 'Inter Tight', Arial, sans-serif;
+  --body: 'Archivo', Arial, sans-serif;
+  --ui: 'Inter', Arial, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --pad-x: clamp(1.25rem, 6vw, 7.5rem);
+  --pad-y: clamp(5rem, 11vh, 8.5rem);
+  --fs-label: clamp(0.6875rem, 0.85vw, 0.875rem);
+  --fs-lede: clamp(1.125rem, 1.75vw, 1.625rem);
+
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fs :is(h1, h2, h3, p, ol, ul, dl, dd, figure) {
+  margin: 0;
+}
+
+.fs :is(ol, ul) {
+  padding: 0;
+  list-style: none;
+}
+
+.fs em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* ---------------------------------------------------------------- Grounds */
+
+.t-ink {
+  --bg: var(--ink);
+  --fg: #fff;
+  --fg-2: rgb(255 255 255 / 78%);
+  --label: rgb(255 255 255 / 64%);
+  --accent: var(--blue-bright);
+  --rule: rgb(255 255 255 / 22%);
+  --water: rgb(255 255 255 / 5%);
+}
+
+.t-blue {
+  --bg: var(--blue);
+  --fg: #fff;
+  --fg-2: rgb(255 255 255 / 88%);
+  --label: rgb(255 255 255 / 76%);
+  --accent: #fff;
+  --rule: rgb(255 255 255 / 34%);
+  --water: rgb(255 255 255 / 7%);
+}
+
+.t-paper,
+.t-wash {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --fg-2: var(--ink-soft);
+  --label: var(--muted);
+  --accent: var(--blue);
+  --rule: var(--rule-paper);
+  --water: rgb(0 56 168 / 5%);
+}
+
+.t-wash {
+  --bg: var(--wash);
+}
+
+/* ---------------------------------------------------------------- Header */
+
+.fs-header {
+  --fg: #fff;
+  --label: rgb(255 255 255 / 70%);
+  --rule: rgb(255 255 255 / 34%);
+  --accent: var(--blue-bright);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  background: rgb(10 10 10 / 88%);
+  backdrop-filter: blur(12px);
+  color: #fff;
+}
+
+.fs-nav {
+  display: flex;
+  height: var(--header-height);
+  padding: 0 var(--pad-x);
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 2rem);
+}
+
+.fs-brand {
+  display: flex;
+  min-width: 0;
+  margin-right: auto;
+  align-items: center;
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* The logo file carries its own side bearing, so it is cropped by height. */
+.fs-brand__logo {
+  display: block;
+  width: auto;
+  height: 40px;
+  flex: none;
+}
+
+.fs-brand__product {
+  padding-left: clamp(0.6rem, 1.2vw, 1rem);
+  border-left: 1px solid rgb(255 255 255 / 28%);
+  color: var(--blue-bright);
+  font: 700 clamp(1rem, 1.3vw, 1.2rem) / 1.6 var(--display);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.fs-nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.fs-nav__links a,
+.fs-menu a {
+  color: var(--label);
+  font: 600 0.9375rem / 1 var(--ui);
+  text-decoration: none;
+}
+
+.fs-nav__links a:hover {
+  color: #fff;
+}
+
+.fs-nav__cta {
+  min-height: 40px !important;
+  padding: 0 1rem !important;
+  white-space: nowrap;
+}
+
+.fs-nav__cta + .fs-nav__cta {
+  margin-left: calc(clamp(0.75rem, 2vw, 2rem) * -0.5);
+}
+
+.fs-nav__toggle {
+  display: none;
+  min-height: 40px;
+  padding: 0 0.9rem;
+  border: 1px solid rgb(255 255 255 / 34%);
+  background: transparent;
+  color: #fff;
+  font: 700 0.875rem / 1 var(--ui);
+}
+
+.fs-menu {
+  display: grid;
+  padding: 0.5rem var(--pad-x) 1.25rem;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.fs-menu[hidden] {
+  display: none;
+}
+
+.fs-menu a {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  color: #fff;
+  font-size: 1.0625rem;
+}
+
+/* Reading progress, where the browser can tie an animation to scrolling. */
+.fs-progress {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--blue-bright);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+@supports (animation-timeline: scroll()) {
+  .fs-progress {
+    animation: fs-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes fs-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 1240px) {
+  .fs-nav__links {
+    display: none;
+  }
+
+  .fs-nav__toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --header-height: 60px;
+  }
+
+  .fs-brand__logo {
+    height: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fs-nav__contribute {
+    display: none !important;
+  }
+}
+
+/* Small phones keep the brand and the menu; both actions move into the menu and the hero. */
+@media (max-width: 480px) {
+  .fs-nav {
+    gap: 0.5rem;
+  }
+
+  .fs-nav__apply {
+    display: none !important;
+  }
+
+  .fs-brand__logo {
+    height: 26px;
+    margin: 0 -0.35rem 0 -0.4rem;
+  }
+
+  .fs-brand__product {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ---------------------------------------------------------------- Slides */
+
+.fs-slide {
+  position: relative;
+  display: flex;
+  min-height: calc(100svh - var(--header-height));
+  padding: calc(var(--pad-y) + 1.5rem) var(--pad-x) var(--pad-y);
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vh, 2.5rem);
+  overflow: clip;
+  isolation: isolate;
+  background: var(--bg);
+  color: var(--fg);
+  scroll-margin-top: var(--header-height);
+}
+
+.fs-slide > * {
+  position: relative;
+  z-index: 1;
+}
+
+.fs-chrome {
+  position: absolute !important;
+  top: clamp(1.25rem, 3.5vh, 2.25rem);
+  right: var(--pad-x);
+  left: var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: var(--label);
+  font: 600 var(--fs-label) / 1.3 var(--ui);
+  letter-spacing: 0.08em;
+}
+
+.fs-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--accent);
+  font: 700 var(--fs-label) / 1.2 var(--ui);
+  letter-spacing: 0.1em;
+}
+
+.fs-eyebrow::before {
+  width: 2rem;
+  height: 3px;
+  flex: none;
+  background: currentColor;
+  content: '';
+}
+
+.fs-label {
+  color: var(--label);
+  font: 700 var(--fs-label) / 1.3 var(--ui);
+  letter-spacing: 0.1em;
+}
+
+.fs-tag {
+  display: inline-block;
+  padding: 0.35em 0.65em 0.3em;
+  background: var(--accent);
+  color: var(--bg);
+  font: 700 var(--fs-label) / 1 var(--ui);
+  letter-spacing: 0.08em;
+  vertical-align: 0.15em;
+}
+
+.fs-source,
+.fs-note {
+  color: var(--label);
+  font: 500 clamp(0.75rem, 0.9vw, 0.9375rem) / 1.45 var(--ui);
+}
+
+.fs-source {
+  position: absolute !important;
+  right: var(--pad-x);
+  bottom: clamp(1.25rem, 3.5vh, 2.25rem);
+  left: var(--pad-x);
+}
+
+.fs-source a,
+.fs-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fs-watermark {
+  position: absolute !important;
+  top: clamp(4rem, 12vh, 8rem);
+  right: clamp(0.25rem, 2vw, 2.5rem);
+  z-index: 0 !important;
+  color: var(--water);
+  font: 800 clamp(9rem, 30vw, 34rem) / 0.75 var(--display);
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------------------------------------------------------------- Type */
+
+.fs-title,
+.fs-display,
+.fs-end,
+.fs-money {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.fs-heading,
+.fs-roster b,
+.fs-cols h3,
+.fs-deliverables h3,
+.fs-steps h3,
+.fs-roles li,
+.fs-types li,
+.fs-flow p,
+.fs-band p {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.fs-title {
+  font-size: clamp(3.4rem, 10.5vw, 12rem);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+}
+
+.fs-title > span,
+.fs-title > em {
+  display: block;
+}
+
+.fs-display {
+  max-width: 17ch;
+  font-size: clamp(3rem, 7.4vw, 8.5rem);
+  line-height: 0.92;
+}
+
+.fs-heading {
+  max-width: 22ch;
+  font-size: clamp(2.25rem, 4.8vw, 5.5rem);
+  line-height: 0.98;
+}
+
+.fs-lede {
+  max-width: 44rem;
+  color: var(--fg-2);
+  font: 500 var(--fs-lede) / 1.42 var(--body);
+}
+
+.fs-dim {
+  opacity: 0.55;
+}
+
+/* Words rise from below a mask, one after another. */
+.rise {
+  display: inline-block;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.rise > span {
+  display: inline-block;
+  transition: transform 1.1s var(--ease-out);
+  transition-delay: var(--d, 0s);
+}
+
+.fs-in {
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  transition-delay: var(--d, 0s);
+}
+
+.fs--motion .fs-slide:not(.is-in) .rise > span {
+  transform: translate3d(0, 108%, 0);
+}
+
+.fs--motion .fs-slide:not(.is-in) .fs-in {
+  opacity: 0;
+  transform: translate3d(0, 1.75rem, 0);
+}
+
+/* ---------------------------------------------------------------- Buttons */
+
+.fs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.fs-button {
+  display: inline-flex;
+  min-height: 52px;
+  padding: 0.75rem 1.4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border: 1px solid var(--blue);
+  background: var(--blue);
+  color: #fff;
+  font: 700 0.9375rem / 1.2 var(--ui);
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.fs-button:hover {
+  border-color: var(--blue-dark);
+  background: var(--blue-dark);
+}
+
+.fs-button--ghost {
+  border-color: var(--rule);
+  background: transparent;
+  color: var(--fg);
+}
+
+.fs-button--ghost:hover {
+  border-color: var(--fg);
+  background: transparent;
+}
+
+.fs-button--light {
+  border-color: #fff;
+  background: #fff;
+  color: var(--blue);
+}
+
+.fs-button--light:hover {
+  border-color: #e8f1ff;
+  background: #e8f1ff;
+}
+
+/* ============================================================== Title */
+
+.s-title {
+  min-height: calc(100svh - var(--header-height));
+  justify-content: flex-end;
+  gap: clamp(1.25rem, 3vh, 2.25rem);
+}
+
+.fs-rays {
+  position: absolute !important;
+  top: 82%;
+  left: 80%;
+  z-index: 0 !important;
+  width: max(125vw, 125vh);
+  aspect-ratio: 1;
+  color: #fff;
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  animation: fs-rays-in 3.2s var(--ease-out) both;
+}
+
+.fs-rays svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  animation: fs-turn 300s linear infinite;
+}
+
+@keyframes fs-rays-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.55) rotate(-12deg);
+  }
+}
+
+@keyframes fs-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The title plays as soon as the page paints, before any script runs. */
+.s-title .rise > span {
+  animation: fs-rise 1.1s var(--ease-out) both;
+  animation-delay: var(--d, 0s);
+}
+
+.s-title .fs-in {
+  animation: fs-fade 0.9s var(--ease-out) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes fs-rise {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+}
+
+@keyframes fs-fade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.75rem, 0);
+  }
+}
+
+.s-title .fs-lede {
+  max-width: 40rem;
+}
+
+.fs-deadline {
+  color: var(--fg-2);
+  font: 600 clamp(0.875rem, 1vw, 1rem) / 1.5 var(--ui);
+}
+
+.fs-deadline .fs-tag {
+  margin-right: 0.5rem;
+}
+
+.fs-hero-fund a {
+  color: #fff;
+  font: 700 clamp(0.9375rem, 1.1vw, 1.0625rem) / 1.4 var(--ui);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.fs-hero-fund a:hover {
+  color: var(--accent);
+}
+
+/* ============================================================== Contribute */
+
+.s-contribute .fs-rays {
+  top: 18%;
+  left: 92%;
+  width: max(90vw, 90vh);
+  opacity: 0.12;
+}
+
+.s-contribute .fs-cols h3 {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.s-contribute .fs-cols--4 p {
+  color: var(--fg-2);
+}
+
+.s-contribute .fs-button--light {
+  min-height: 60px;
+  padding: 0.85rem 1.75rem;
+  font-size: 1.0625rem;
+}
+
+.s-contribute .fs-note {
+  margin-top: -0.75rem;
+}
+
+/* ============================================================== Roster */
+
+.fs-roster {
+  width: 100%;
+  max-width: 82rem;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
+}
+
+.fs-roster li {
+  display: grid;
+  padding: clamp(1rem, 2.2vh, 1.6rem) 0;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  align-items: baseline;
+  gap: 0.5rem 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.fs-roster li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.fs-roster b {
+  font-size: clamp(2rem, 4.4vw, 4.75rem);
+  line-height: 1;
+}
+
+.fs-roster span {
+  color: var(--fg-2);
+  font: 500 clamp(1rem, 1.4vw, 1.375rem) / 1.45 var(--ui);
+}
+
+/* ============================================================== Stats */
+
+.fs-stats {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+}
+
+.fs-stat {
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--rule);
+}
+
+.fs-stat__n {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font: 800 clamp(4.5rem, 10vw, 10rem) / 0.9 var(--display);
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-stat__n small {
+  color: var(--accent);
+  font: 700 clamp(1.25rem, 2.2vw, 2.25rem) / 1 var(--display);
+  letter-spacing: -0.02em;
+}
+
+.fs-stat p:not(.fs-stat__n, .fs-label) {
+  max-width: 24rem;
+  margin-top: 1rem;
+  color: var(--fg-2);
+  font: 500 clamp(0.95rem, 1.15vw, 1.15rem) / 1.45 var(--ui);
+}
+
+.fs-stat .fs-label + p {
+  margin-top: 0.6rem;
+}
+
+/* A full-bleed band that closes a slide. */
+.fs-band {
+  margin: clamp(1.5rem, 5vh, 3.5rem) calc(var(--pad-x) * -1) calc(var(--pad-y) * -1);
+  padding: clamp(1.5rem, 4vh, 2.5rem) var(--pad-x);
+  background: var(--blue);
+  color: #fff;
+}
+
+.fs-band p {
+  font-size: clamp(1.4rem, 2.6vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.fs-band p span {
+  color: rgb(255 255 255 / 62%);
+}
+
+.fs-band--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+}
+
+.fs-band--split p {
+  max-width: 52rem;
+}
+
+/* ============================================================== Aims */
+
+.fs-cols {
+  display: grid;
+  width: 100%;
+  gap: clamp(1.25rem, 2.4vw, 2.5rem);
+}
+
+.fs-cols--5 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.fs-cols--4 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.fs-cols > * {
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--rule);
+}
+
+.fs-cols--5 span {
+  display: block;
+  color: var(--accent);
+  font: 800 clamp(2.25rem, 3.6vw, 3.75rem) / 1 var(--display);
+  letter-spacing: -0.04em;
+}
+
+.fs-cols--5 p {
+  margin-top: 1rem;
+  color: var(--fg);
+  font: 600 clamp(1rem, 1.25vw, 1.2rem) / 1.42 var(--ui);
+}
+
+.fs-cols h3 {
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.fs-cols--4 p {
+  margin-top: 0.75rem;
+  color: var(--label);
+  font: 500 clamp(0.95rem, 1.05vw, 1.05rem) / 1.5 var(--ui);
+}
+
+.fs-cols--4 ul {
+  display: grid;
+  margin-top: 1rem;
+  gap: 0.55rem;
+}
+
+.fs-cols--4 li {
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--accent);
+  color: var(--fg);
+  font: 500 clamp(0.95rem, 1.05vw, 1.05rem) / 1.4 var(--ui);
+}
+
+/* ============================================================== Statement */
+
+.fs-statement {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 4vh, 3rem);
+}
+
+.s-compass .fs-display {
+  max-width: 19ch;
+}
+
+/* ============================================================== Split */
+
+.fs-split {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+}
+
+.fs-split > div {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vh, 2.5rem);
+}
+
+/* ============================================================== Areas */
+
+.fs-tracks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.fs-tracks li {
+  display: flex;
+  padding: clamp(0.9rem, 2vh, 1.25rem) 0;
+  align-items: baseline;
+  gap: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  font: 700 clamp(1.05rem, 1.45vw, 1.45rem) / 1.2 var(--display);
+  letter-spacing: -0.02em;
+}
+
+.fs-tracks span {
+  color: var(--accent);
+  font: 700 var(--fs-label) / 1 var(--ui);
+}
+
+/* ============================================================== Challenges */
+
+.fs-challenge {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+}
+
+.fs-challenge__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: clamp(1.1rem, 2.4vh, 1.75rem);
+}
+
+.s-challenge .fs-heading {
+  font-size: clamp(2.25rem, 4.4vw, 5rem);
+}
+
+.s-challenge .fs-lede {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+}
+
+.fs-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 1.25rem 2rem;
+}
+
+.fs-figure {
+  padding-top: 0.9rem;
+  border-top: 2px solid var(--accent);
+}
+
+.fs-figure__n {
+  color: var(--accent);
+  font: 800 clamp(2.5rem, 4.6vw, 4.75rem) / 0.95 var(--display);
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+.fs-figure p:not(.fs-figure__n) {
+  margin-top: 0.6rem;
+  color: var(--fg-2);
+  font: 500 clamp(0.875rem, 1vw, 1rem) / 1.4 var(--ui);
+}
+
+.fs-build {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: -0.4rem !important;
+}
+
+.fs-build li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--fg);
+  font: 500 clamp(1rem, 1.2vw, 1.15rem) / 1.42 var(--ui);
+}
+
+.fs-build li::before {
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  content: '→';
+}
+
+.fs-partners {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.fs-partners dt {
+  color: var(--label);
+  font: 700 var(--fs-label) / 1.3 var(--ui);
+  letter-spacing: 0.1em;
+}
+
+.fs-partners dd {
+  margin-top: 0.35rem;
+  color: var(--fg);
+  font: 600 clamp(0.9rem, 1vw, 1rem) / 1.4 var(--ui);
+}
+
+/* The partner's own deck, framed like a slide on a screen. */
+.fs-deck {
+  display: grid;
+  gap: 1rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.fs-deck__frame {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #fff;
+  box-shadow: 0 40px 80px -40px rgb(0 0 0 / 55%);
+  transform: rotate(-1.2deg);
+  transition:
+    transform 0.6s var(--ease-out),
+    box-shadow 0.6s var(--ease-out);
+}
+
+.fs-deck__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.fs-deck:hover .fs-deck__frame,
+.fs-deck:focus-visible .fs-deck__frame {
+  box-shadow: 0 50px 90px -40px rgb(0 0 0 / 65%);
+  transform: rotate(0deg) translateY(-6px);
+}
+
+.fs-deck__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1.5rem;
+}
+
+.fs-deck__caption > span {
+  color: var(--label);
+  font: 500 clamp(0.8rem, 0.9vw, 0.9rem) / 1.4 var(--ui);
+}
+
+.fs-deck__caption b {
+  color: var(--accent);
+  font: 700 clamp(0.95rem, 1.1vw, 1.1rem) / 1.3 var(--ui);
+}
+
+.fs-deck:hover .fs-deck__caption b {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ============================================================== Who */
+
+.fs-roles {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.5rem, 4vw, 4rem);
+  border-top: 1px solid var(--rule);
+}
+
+.fs-roles li {
+  padding: clamp(0.8rem, 1.8vh, 1.2rem) 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: clamp(1.35rem, 2.4vw, 2.4rem);
+  line-height: 1.1;
+}
+
+.fs-types {
+  display: grid;
+  width: 100%;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem 2.5rem;
+  background: var(--blue);
+  color: #fff;
+}
+
+.fs-types .fs-label {
+  color: rgb(255 255 255 / 76%);
+}
+
+.fs-types ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 2rem;
+}
+
+.fs-types li {
+  font-size: clamp(1.35rem, 2.2vw, 2.2rem);
+  line-height: 1.15;
+}
+
+.fs-types > p:last-child {
+  grid-column: 1 / -1;
+  color: rgb(255 255 255 / 82%);
+  font: 500 clamp(0.875rem, 1vw, 1rem) / 1.45 var(--ui);
+}
+
+/* ============================================================== Deliverables */
+
+.fs-deliverables {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 0 clamp(2rem, 4vw, 4rem);
+}
+
+.fs-deliverables li {
+  display: grid;
+  padding: clamp(1.25rem, 3vh, 2rem) 0;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+.fs-deliverables span {
+  grid-row: span 2;
+  color: var(--accent);
+  font: 800 clamp(3.5rem, 6vw, 6.5rem) / 0.85 var(--display);
+  letter-spacing: -0.05em;
+}
+
+.fs-deliverables h3 {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1.05;
+}
+
+.fs-deliverables p {
+  margin-top: 0.6rem;
+  color: var(--fg-2);
+  font: 500 clamp(0.95rem, 1.1vw, 1.1rem) / 1.45 var(--ui);
+}
+
+/* ============================================================== Partnership */
+
+.fs-flow {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 3rem);
+  counter-reset: flow;
+}
+
+.fs-flow li {
+  position: relative;
+  padding: clamp(1.25rem, 2.4vw, 2rem);
+  background: var(--paper);
+  border-top: 4px solid var(--accent);
+}
+
+.fs-flow li:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: calc(clamp(1.25rem, 3vw, 3rem) / -2);
+  z-index: 1;
+  color: var(--accent);
+  font: 800 1.75rem / 1 var(--display);
+  content: '→';
+  transform: translate(50%, -50%);
+}
+
+.fs-flow span {
+  color: var(--accent);
+  font: 700 var(--fs-label) / 1.3 var(--ui);
+  letter-spacing: 0.1em;
+}
+
+.fs-flow p {
+  margin-top: 0.75rem;
+  font-size: clamp(1.4rem, 2.2vw, 2.25rem);
+  line-height: 1.08;
+}
+
+/* ============================================================== Fund */
+
+.fs-money {
+  margin-bottom: 0.14em !important;
+  font-size: clamp(4.5rem, 17vw, 19rem);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fs-money__sub {
+  max-width: 30ch;
+  font: 700 clamp(1.5rem, 3vw, 3rem) / 1.08 var(--display);
+  letter-spacing: -0.03em;
+}
+
+.fs-stats--terms .fs-stat {
+  border-top-width: 1px;
+}
+
+/* ============================================================== Selection */
+
+.fs-criteria {
+  border-top: 1px solid var(--rule);
+}
+
+.fs-criteria li {
+  display: grid;
+  padding: clamp(0.9rem, 2vh, 1.3rem) 0;
+  grid-template-columns: clamp(5.5rem, 10vw, 10rem) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fs-criteria b {
+  grid-row: span 2;
+  color: var(--accent);
+  font: 800 clamp(2.75rem, 5.4vw, 5.5rem) / 0.9 var(--display);
+  letter-spacing: -0.05em;
+}
+
+.fs-criteria span {
+  color: var(--fg);
+  font: 600 clamp(1rem, 1.3vw, 1.3rem) / 1.3 var(--ui);
+}
+
+.fs-criteria i {
+  display: block;
+  height: 4px;
+  margin-top: 0.75rem;
+  background: var(--accent);
+  transform: scaleX(var(--w, 1));
+  transform-origin: 0 50%;
+  transition: transform 1.2s var(--ease-out);
+  transition-delay: calc(var(--d, 0s) + 0.2s);
+}
+
+.fs--motion .fs-slide:not(.is-in) .fs-criteria i {
+  transform: scaleX(0);
+}
+
+/* ============================================================== Timeline */
+
+.s-timeline .fs-split {
+  align-items: start;
+}
+
+.fs-timeline {
+  border-top: 1px solid var(--rule);
+}
+
+.fs-timeline li {
+  display: grid;
+  padding: clamp(0.8rem, 1.8vh, 1.1rem) 0;
+  grid-template-columns: clamp(8rem, 13vw, 12rem) minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fs-timeline b {
+  font: 700 clamp(1.05rem, 1.5vw, 1.5rem) / 1.2 var(--display);
+  letter-spacing: -0.02em;
+}
+
+.fs-timeline li > span {
+  color: var(--fg-2);
+  font: 500 clamp(0.95rem, 1.1vw, 1.1rem) / 1.45 var(--ui);
+}
+
+.fs-timeline .is-deadline b,
+.fs-timeline .is-deadline > span {
+  color: var(--accent);
+}
+
+.fs-timeline .fs-tag {
+  margin-left: 0.6rem;
+}
+
+/* ============================================================== End */
+
+.s-end {
+  gap: clamp(1.75rem, 4vh, 3rem);
+}
+
+.fs-end {
+  max-width: 15ch;
+  font-size: clamp(3.25rem, 8.6vw, 10rem);
+  line-height: 0.9;
+}
+
+.fs-end > span {
+  display: block;
+}
+
+.fs-steps {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: clamp(1.25rem, 3vw, 3rem);
+}
+
+.fs-steps li {
+  padding-top: 1.1rem;
+  border-top: 2px solid var(--rule);
+}
+
+.fs-steps span {
+  font: 700 var(--fs-label) / 1 var(--ui);
+  letter-spacing: 0.1em;
+  opacity: 0.76;
+}
+
+.fs-steps h3 {
+  margin-top: 0.75rem !important;
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  line-height: 1.05;
+}
+
+.fs-steps p {
+  margin-top: 0.6rem;
+  color: var(--fg-2);
+  font: 500 clamp(0.95rem, 1.1vw, 1.1rem) / 1.45 var(--ui);
+}
+
+/* ---------------------------------------------------------------- Footer */
+
+.fs-footer {
+  --label: rgb(255 255 255 / 64%);
+
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  background: var(--ink);
+  color: #fff;
+}
+
+.fs-footer__primary {
+  display: grid;
+  padding: clamp(3rem, 8vh, 5rem) var(--pad-x);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.75fr) minmax(0, 0.75fr);
+  gap: 2.5rem 4rem;
+}
+
+.fs-footer__logo {
+  display: block;
+  width: auto;
+  height: 52px;
+  margin-left: -0.6rem;
+}
+
+.fs-footer__title {
+  margin-top: 1rem !important;
+  color: var(--blue-bright);
+  font: 700 1.125rem / 1.3 var(--display);
+}
+
+.fs-footer__lede {
+  max-width: 36rem;
+  margin-top: 0.75rem !important;
+  color: rgb(255 255 255 / 70%);
+  font: 500 0.9375rem / 1.55 var(--ui);
+}
+
+.fs-footer__fund {
+  max-width: 36rem;
+  margin-top: 1.25rem !important;
+  color: #fff;
+  font: 600 0.9375rem / 1.55 var(--ui);
+}
+
+.fs-footer__fund a {
+  color: var(--blue-bright);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.fs-footer ul {
+  display: grid;
+  margin-top: 1rem;
+  gap: 0.6rem;
+}
+
+.fs-footer ul a,
+.fs-footer__meta a {
+  color: #fff;
+  font: 600 0.9375rem / 1.4 var(--ui);
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 35%);
+  text-underline-offset: 4px;
+}
+
+.fs-footer ul a:hover,
+.fs-footer__meta a:hover {
+  text-decoration-color: currentColor;
+}
+
+.fs-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem var(--pad-x);
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  color: rgb(255 255 255 / 64%);
+  font: 600 0.75rem / 1.4 var(--ui);
+  letter-spacing: 0.06em;
+}
+
+.fs-footer__meta a {
+  font-size: inherit;
+}
+
+/* ---------------------------------------------------------------- Narrow */
+
+@media (max-width: 1024px) {
+  .fs-split,
+  .fs-challenge {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fs-deck {
+    max-width: 40rem;
+  }
+
+  .fs-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fs-flow li:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: calc(clamp(1.25rem, 3vw, 3rem) / -2);
+    left: 2rem;
+    content: '↓';
+    transform: translate(0, 50%);
+  }
+
+  .fs-footer__primary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fs-footer__primary > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .fs-slide {
+    min-height: auto;
+    padding-top: calc(var(--pad-y) + 1rem);
+  }
+
+  .s-title {
+    min-height: calc(100svh - var(--header-height));
+  }
+
+  .fs-chrome > span:last-child {
+    display: none;
+  }
+
+  .fs-roster li,
+  .fs-types,
+  .fs-timeline li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fs-tracks,
+  .fs-roles,
+  .fs-partners {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fs-actions,
+  .fs-actions .fs-button {
+    width: 100%;
+  }
+
+  .fs-band--split .fs-button {
+    width: 100%;
+  }
+
+  .fs-footer__primary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fs-source {
+    position: static !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-rays,
+  .fs-rays svg,
+  .s-title .rise > span,
+  .s-title .fs-in {
+    animation: none !important;
+  }
+
+  .fs-deck__frame {
+    transform: none;
+  }
+}
