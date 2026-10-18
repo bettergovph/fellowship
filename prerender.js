@@ -13,7 +13,10 @@ const seo = {
     'A three-month civic technology fellowship for developers, designers, data specialists, and researchers. Build with government agencies and civil society for DBM COMPASS and Philippine open data. Applications close November 17, 2026.',
   keywords:
     'BetterGovPH Fellowship, civic tech fellowship Philippines, DBM COMPASS, open data, open government partnership, WeSolve Foundation, PH-OGP',
-  ogImage: `${origin}/og-fellowship.png`,
+  // Bump ?v= whenever the image changes so social platforms fetch it again.
+  ogImage: `${origin}/og-fellowship.png?v=2`,
+  ogImageAlt:
+    'The BetterGov Fellowship. Build civic tech that powers open government. Apply by November 17, 2026.',
 }
 
 const metaTags = `<!-- Primary Meta Tags -->
@@ -30,7 +33,7 @@ const metaTags = `<!-- Primary Meta Tags -->
     <meta property="og:image" content="${seo.ogImage}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="${seo.title}" />
+    <meta property="og:image:alt" content="${seo.ogImageAlt}" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />

@@ -1,0 +1,160 @@
+<!doctype html>
+<!--
+  Source for public/og-fellowship.png, the 1200 × 630 social share image.
+  It mirrors the hero. To regenerate after editing:
+
+    npx playwright screenshot --viewport-size "1200, 630" --wait-for-timeout 2000 \
+      scripts/og-image.html public/og-fellowship.png
+
+  Then bump the ?v= on ogImage in prerender.js so Facebook and others fetch it again.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&family=Inter+Tight:wght@400..900&display=swap"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+
+      .rays {
+        position: absolute;
+        top: 560px;
+        left: 1010px;
+        width: 1500px;
+        height: 1500px;
+        margin: -750px 0 0 -750px;
+        fill: #fff;
+        opacity: 0.12;
+      }
+
+      .card {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        padding: 52px 64px 54px;
+        flex-direction: column;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand img {
+        height: 44px;
+        margin-left: -8px;
+      }
+
+      .brand b {
+        padding-left: 16px;
+        border-left: 1px solid rgb(255 255 255 / 28%);
+        color: #0096ff;
+        font: 700 24px 'Inter Tight';
+        letter-spacing: -0.01em;
+      }
+
+      .eyebrow {
+        display: flex;
+        margin-top: auto;
+        align-items: center;
+        gap: 14px;
+        color: #0096ff;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+
+      .eyebrow::before {
+        width: 30px;
+        height: 3px;
+        background: currentColor;
+        content: '';
+      }
+
+      h1 {
+        margin-top: 16px;
+        font: 800 112px / 0.86 'Inter Tight';
+        letter-spacing: -0.055em;
+      }
+
+      h1 span {
+        display: block;
+        color: #0096ff;
+      }
+
+      .tagline {
+        margin-top: 22px;
+        font: 700 34px / 1.05 'Inter Tight';
+        letter-spacing: -0.035em;
+      }
+
+      .foot {
+        display: flex;
+        margin-top: 30px;
+        align-items: center;
+        gap: 22px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .tag {
+        padding: 9px 14px;
+        background: #0096ff;
+        color: #0a0a0a;
+      }
+
+      .foot span:last-child {
+        color: rgb(255 255 255 / 78%);
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="rays" viewBox="-1000 -1000 2000 2000" aria-hidden="true"></svg>
+    <div class="card">
+      <div class="brand">
+        <img src="https://assets.bettergov.ph/logos/webp/horizontal-white.webp" alt="" />
+        <b>Fellowship</b>
+      </div>
+      <p class="eyebrow">Call for builders</p>
+      <h1>The BetterGov <span>Fellowship</span></h1>
+      <p class="tagline">Build civic tech that powers open government.</p>
+      <div class="foot">
+        <span class="tag">Apply by November 17, 2026</span>
+        <span>fellowship.bettergov.ph</span>
+      </div>
+    </div>
+    <script>
+      // The eight rays of the sun on the flag, three beams each, as on the site.
+      const beams = [
+        [0, 960, 64],
+        [-8, 780, 40],
+        [8, 780, 40],
+      ]
+      let rays = ''
+      for (let ray = 0; ray < 8; ray++) {
+        rays += `<g transform="rotate(${ray * 45})">`
+        for (const [angle, length, width] of beams) {
+          rays += `<polygon transform="rotate(${angle})" points="-6,-190 6,-190 ${width / 2},-${length} -${width / 2},-${length}"/>`
+        }
+        rays += '</g>'
+      }
+      document.querySelector('.rays').innerHTML = rays + '<circle r="150"/>'
+    </script>
+  </body>
+</html>

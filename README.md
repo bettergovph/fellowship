@@ -47,7 +47,7 @@ src/
 └── fellowship.css        # The slide design system
 public/
 ├── decks/                # Cover slides of each challenge's pitch deck
-└── og-fellowship.png     # Social share image
+└── og-fellowship.png     # Social share image, rendered from scripts/og-image.html
 ```
 
 ## Editing content
