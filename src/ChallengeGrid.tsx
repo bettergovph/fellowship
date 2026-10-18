@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useRef, type MouseEvent } from 'react'
-import { challengeBriefs, deckSlideUrl, upcomingChallenges, type ChallengeBrief } from './content'
+import {
+  challengeBriefs,
+  deckSlideUrl,
+  fellowshipLinks,
+  upcomingChallenges,
+  type ChallengeBrief,
+} from './content'
 import { d } from './helpers'
+import { ExternalLink } from './primitives'
 
 const dialogId = (brief: ChallengeBrief) => `challenge-${brief.slug}`
 
@@ -161,29 +168,34 @@ export function ChallengeGrid() {
                   {brief.figureSource && <p className="fs-note">Source: {brief.figureSource}</p>}
                 </div>
 
-                <a
-                  className="fs-deck"
-                  href={deckSlideUrl(brief.deck.slideId)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="fs-deck__frame">
-                    <img
-                      src={brief.deck.image}
-                      alt=""
-                      width={960}
-                      height={540}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </span>
-                  <span className="fs-deck__caption">
-                    <span>Pitch deck by {brief.deck.by}</span>
-                    <b>
-                      Open the {brief.track} deck <span aria-hidden="true">↗</span>
-                    </b>
-                  </span>
-                </a>
+                <div className="fs-modal__aside">
+                  <a
+                    className="fs-deck"
+                    href={deckSlideUrl(brief.deck.slideId)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="fs-deck__frame">
+                      <img
+                        src={brief.deck.image}
+                        alt=""
+                        width={960}
+                        height={540}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
+                    <span className="fs-deck__caption">
+                      <span>Pitch deck by {brief.deck.by}</span>
+                      <b>
+                        Open the {brief.track} deck <span aria-hidden="true">↗</span>
+                      </b>
+                    </span>
+                  </a>
+                  <ExternalLink href={fellowshipLinks.apply} className="fs-button">
+                    Apply now
+                  </ExternalLink>
+                </div>
               </div>
 
               <div className="fs-modal__nav">
