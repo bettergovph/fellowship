@@ -587,6 +587,12 @@ body {
   }
 }
 
+.fs-title-sub {
+  font: 700 clamp(1.6rem, 3.4vw, 3.75rem) / 1.02 var(--display);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
 .s-title .fs-lede {
   max-width: 40rem;
 }

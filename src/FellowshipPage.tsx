@@ -37,19 +37,19 @@ export function FellowshipPage() {
 
       <section className="fs-slide t-ink s-title" id="top">
         <Rays />
-        <Chrome left="Call for builders" right="Pilot cohort · 2026–2027" />
-        <Eyebrow>BetterGovPH Fellowship</Eyebrow>
+        <Chrome left="Pilot cohort" right="December 2026 – March 2027" />
+        <Eyebrow>Call for builders</Eyebrow>
         <h1 className="fs-title">
           <span>
-            <Rise text="Build civic tech" start={0.1} />
-          </span>
-          <span>
-            <Rise text="that powers" start={0.3} />
+            <Rise text="The BetterGov" start={0.1} />
           </span>
           <em>
-            <Rise text="open government." start={0.45} />
+            <Rise text="Fellowship" start={0.3} />
           </em>
         </h1>
+        <p className="fs-title-sub fs-in" style={d(0.55)}>
+          Build civic tech that powers open government.
+        </p>
         <p className="fs-lede fs-in" style={d(0.7)}>
           A three-month civic technology fellowship. Real public challenges from government and
           civil society. Working solutions for DBM COMPASS and the Philippines' open data ecosystem.
