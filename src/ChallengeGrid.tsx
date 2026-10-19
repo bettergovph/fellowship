@@ -69,23 +69,39 @@ export function ChallengeGrid() {
                 decoding="async"
               />
             </span>
-            <p className="fs-card__track">{brief.track}</p>
-            <h3 className="fs-card__title">
-              <a
-                href={`#${dialogId(brief)}`}
-                aria-haspopup="dialog"
-                onClick={event => {
-                  event.preventDefault()
-                  open(n)
-                }}
-              >
-                {brief.headline} <em>{brief.accent}</em>
-              </a>
-            </h3>
-            <p className="fs-card__partners">{brief.government}</p>
-            <span className="fs-card__more" aria-hidden="true">
-              See the challenge <span>→</span>
-            </span>
+            <div className="fs-card__body">
+              <p className="fs-card__track">{brief.track}</p>
+              <h3 className="fs-card__title">
+                <a
+                  href={`#${dialogId(brief)}`}
+                  aria-haspopup="dialog"
+                  onClick={event => {
+                    event.preventDefault()
+                    open(n)
+                  }}
+                >
+                  {brief.headline} <em>{brief.accent}</em>
+                </a>
+              </h3>
+              <dl className="fs-card__partners">
+                <div>
+                  <dt>Government</dt>
+                  <dd>{brief.government}</dd>
+                </div>
+                <div>
+                  <dt>Civil society</dt>
+                  <dd>{brief.civilSociety}</dd>
+                </div>
+              </dl>
+              <div className="fs-card__actions">
+                <span className="fs-card__more" aria-hidden="true">
+                  See the challenge <span>→</span>
+                </span>
+                <ExternalLink href={fellowshipLinks.apply} className="fs-button fs-card__apply">
+                  Apply now
+                </ExternalLink>
+              </div>
+            </div>
           </li>
         ))}
         <li className="fs-card fs-card--soon fs-in" style={d(0.25 + challengeBriefs.length * 0.06)}>
@@ -95,7 +111,7 @@ export function ChallengeGrid() {
               <li key={challenge}>{challenge}</li>
             ))}
           </ul>
-          <p className="fs-card__partners">The organizers may announce more.</p>
+          <p className="fs-card__note">The organizers may announce more.</p>
         </li>
       </ul>
 
