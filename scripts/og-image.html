@@ -26,7 +26,12 @@
         width: 1200px;
         height: 630px;
         overflow: hidden;
-        background: #0a0a0a;
+        background:
+          linear-gradient(rgb(255 255 255 / 8%) 1px, transparent 1px) 0 0 / 120px 120px,
+          linear-gradient(90deg, rgb(255 255 255 / 8%) 1px, transparent 1px) 0 0 / 120px 120px,
+          linear-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px) 0 0 / 24px 24px,
+          linear-gradient(90deg, rgb(255 255 255 / 4%) 1px, transparent 1px) 0 0 / 24px 24px,
+          radial-gradient(110% 90% at 85% 100%, #0b4fd1 0%, #0038a8 45%, #00226e 100%);
         color: #fff;
         font-family: 'Inter', Arial, sans-serif;
       }
@@ -38,8 +43,8 @@
         width: 1500px;
         height: 1500px;
         margin: -750px 0 0 -750px;
-        fill: #fff;
-        opacity: 0.12;
+        fill: #fcd116;
+        opacity: 0.16;
       }
 
       .card {
@@ -63,8 +68,8 @@
 
       .brand b {
         padding-left: 16px;
-        border-left: 1px solid rgb(255 255 255 / 28%);
-        color: #0096ff;
+        border-left: 1px solid rgb(255 255 255 / 30%);
+        color: #fcd116;
         font: 700 24px 'Inter Tight';
         letter-spacing: -0.01em;
       }
@@ -74,7 +79,7 @@
         margin-top: auto;
         align-items: center;
         gap: 14px;
-        color: #0096ff;
+        color: #fcd116;
         font-size: 17px;
         font-weight: 700;
         letter-spacing: 0.1em;
@@ -95,7 +100,7 @@
 
       h1 span {
         display: block;
-        color: #0096ff;
+        color: #fcd116;
       }
 
       .tagline {
@@ -115,12 +120,12 @@
 
       .tag {
         padding: 9px 14px;
-        background: #0096ff;
+        background: #fcd116;
         color: #0a0a0a;
       }
 
       .foot span:last-child {
-        color: rgb(255 255 255 / 78%);
+        color: rgb(255 255 255 / 82%);
       }
     </style>
   </head>

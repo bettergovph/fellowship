@@ -14,7 +14,7 @@ const seo = {
   keywords:
     'BetterGovPH Fellowship, civic tech fellowship Philippines, DBM COMPASS, open data, open government partnership, WeSolve Foundation, PH-OGP',
   // Bump ?v= whenever the image changes so social platforms fetch it again.
-  ogImage: `${origin}/og-fellowship.png?v=2`,
+  ogImage: `${origin}/og-fellowship.png?v=3`,
   ogImageAlt:
     'The BetterGov Fellowship. Build civic tech that powers open government. Apply by November 17, 2026.',
 }

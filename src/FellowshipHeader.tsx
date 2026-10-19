@@ -57,7 +57,7 @@ export function FellowshipHeader() {
           href={fellowshipLinks.apply}
           target="_blank"
           rel="noopener noreferrer"
-          className="fs-button fs-nav__cta fs-nav__apply"
+          className="fs-button fs-button--sun fs-nav__cta fs-nav__apply"
         >
           Apply <span aria-hidden="true">↗</span>
         </a>

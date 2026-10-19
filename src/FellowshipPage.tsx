@@ -34,7 +34,7 @@ export function FellowshipPage() {
     <main className="fs-main" ref={rootRef}>
       {/* ═══════════════════════════ TITLE ═══════════════════════════ */}
 
-      <section className="fs-slide t-ink s-title" id="top" ref={heroRef}>
+      <section className="fs-slide t-blueprint s-title" id="top" ref={heroRef}>
         <Rays />
         <Eyebrow>Call for builders</Eyebrow>
         <h1 className="fs-title">
@@ -53,7 +53,7 @@ export function FellowshipPage() {
           civil society. Working solutions for DBM COMPASS and the Philippines' open data ecosystem.
         </p>
         <div className="fs-actions fs-in" style={d(0.85)}>
-          <ExternalLink href={fellowshipLinks.apply} className="fs-button">
+          <ExternalLink href={fellowshipLinks.apply} className="fs-button fs-button--sun">
             Apply now
           </ExternalLink>
           <ExternalLink href={fellowshipLinks.guidelines} className="fs-button fs-button--ghost">
